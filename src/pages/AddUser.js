@@ -10,65 +10,77 @@ const AddUser = () => {
 
   useEffect(() => {
     document.title = `Add Employee | Admin`;
-}, []);
+  }, []);
 
-const [formData, setFormData] = useState({
-    firstname: '',
-    middlename: '',
-    lastname: '',
-    email: '',
-    password: '',
-    gender: '',
-    bloodGroup: '',
-    birthdate: '',
-    designation: '',
-    team: '',
-    dateOfJoining: '',
-    roles: ''
-});
+  const [formData, setFormData] = useState({
+    firstname: "",
+    middlename: "",
+    lastname: "",
+    email: "",
+    password: "",
+    mobile: "",
+    emergencyMobile: "",
+    gender: "",
+    bloodGroup: "",
+    birthdate: "",
+    designation: "",
+    team: "",
+    dateOfJoining: "",
+    roles: "",
+  });
 
-const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-        ...prevState,
-        [name]: value
+    
+    const updatedValue = (name === 'team' || name === 'designation') ? parseInt(value, 10) : value;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: updatedValue,
     }));
-};
+  };
+  
 
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
 
     try {
-        const response = await axios.post("http://localhost:8080/auth/addNewEmployee", formData);
-        const { success, message } = response.data;
-        console.log(response.data);
+      const response = await axios.post(
+        "http://localhost:8080/auth/addNewEmployee",
+        formData
+      );
+      const { success, message } = response.data;
+      console.log(response.data);
 
-        if (success) {
-            toast.success(message);
-            setFormData({
-                firstname: '',
-                middlename: '',
-                lastname: '',
-                email: '',
-                password: '',
-                gender: '',
-                bloodGroup: '',
-                birthdate: '',
-                designation: '',
-                team: '',
-                dateOfJoining: '',
-                roles: ''
-            });
-        } else {
-            toast.error(message || "Couldn't Add Employee!");
-        }
+      if (success) {
+        toast.success(message);
+        setFormData({
+          firstname: "",
+          middlename: "",
+          lastname: "",
+          email: "",
+          password: "",
+          mobile: "",
+          emergencyMobile: "",
+          gender: "",
+          bloodGroup: "",
+          birthdate: "",
+          designation: "",
+          team: "",
+          dateOfJoining: "",
+          roles: "",
+        });
+      } else {
+        toast.error(message || "Couldn't Add Employee!");
+      }
     } catch (error) {
-        console.error("Error:", error);
-        // Handle specific error cases here (network error, server error, etc.)
-        toast.error("An error occurred while processing your request. Please try again later.");
+      console.error("Error:", error);
+      // Handle specific error cases here (network error, server error, etc.)
+      toast.error(
+        "An error occurred while processing your request. Please try again later."
+      );
     }
-};
+  };
 
   return (
     <>
@@ -133,6 +145,59 @@ const handleSubmit = async (e) => {
                     />
                   </div>
                   <div className="div7">
+                    <label htmlFor="mobile">Mobile No.</label>
+                    <input
+                      type="text"
+                      id="mobile"
+                      name="mobile"
+                      value={formData.mobile}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="div8">
+                    <label htmlFor="designation">Designation</label>
+                    <select
+                      id="designation"
+                      name="designation"
+                      value={formData.designation}
+                      onChange={handleChange}
+                    >
+                      <option value="1">Manager</option>
+                      <option value="2">Tech Lead</option>
+                      <option value="3">Sr. Developer</option>
+                      <option value="4">Jr. Developer</option>
+                      <option value="5">Intern</option>
+                    </select>
+                  </div>
+                  <div className="div9">
+                    <label htmlFor="team">Team</label>
+                    <select
+                      id="team"
+                      name="team"
+                      value={formData.team}
+                      onChange={handleChange}
+                    >
+                      <option value="1">Java</option>
+                      <option value="2">MERN</option>
+                      <option value="3">Python</option>
+                      <option value="4">PHP</option>
+                      <option value="5">Android</option>
+                    </select>
+                  </div>
+
+                  <div className="div10">
+                    <label htmlFor="emergencyMobile">
+                      Emergency Contact No.
+                    </label>
+                    <input
+                      type="text"
+                      id="emergencyMobile"
+                      name="emergencyMobile"
+                      value={formData.emergencyMobile}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="div11">
                     <label htmlFor="gender">Gender</label>
                     <select
                       id="gender"
@@ -145,7 +210,7 @@ const handleSubmit = async (e) => {
                       <option value="Other">Other</option>
                     </select>
                   </div>
-                  <div className="div8">
+                  <div className="div12">
                     <label htmlFor="blood_group">Blood Group</label>
                     <select
                       id="blood_group"
@@ -163,56 +228,6 @@ const handleSubmit = async (e) => {
                       <option value="O-">O-</option>
                     </select>
                   </div>
-                  <div className="div9">
-                    <label htmlFor="birthdate">Birthdate</label>
-                    <input
-                      type="date"
-                      id="birthdate"
-                      name="birthdate"
-                      value={formData.birthdate}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="div10">
-                    <label htmlFor="designation">Designation</label>
-                    <select
-                      id="designation"
-                      name="designation"
-                      value={formData.designation}
-                      onChange={handleChange}
-                    >
-                      <option value={1}>Manager</option>
-                      <option value={2}>Tech Lead</option>
-                      <option value={3}>Sr. Developer</option>
-                      <option value={4}>Jr. Developer</option>
-                      <option value={5}>Intern</option>
-                    </select>
-                  </div>
-                  <div className="div11">
-                    <label htmlFor="team">Team</label>
-                    <select
-                      id="team"
-                      name="team"
-                      value={formData.team}
-                      onChange={handleChange}
-                    >
-                      <option value={1}>Java</option>
-                      <option value={2}>MERN</option>
-                      <option value={3}>Python</option>
-                      <option value={4}>PHP</option>
-                      <option value={5}>Android</option>
-                    </select>
-                  </div>
-                  <div className="div12">
-                    <label htmlFor="date_of_joining">Joining Date</label>
-                    <input
-                      type="date"
-                      id="date_of_joining"
-                      name="dateOfJoining"
-                      value={formData.dateOfJoining}
-                      onChange={handleChange}
-                    />
-                  </div>
                   <div className="div13">
                     <label htmlFor="roles">Role</label>
                     <select
@@ -222,8 +237,28 @@ const handleSubmit = async (e) => {
                       onChange={handleChange}
                     >
                       <option value="ROLE_USER">User</option>
-                      <option value="ROLE_ADMIN">Admin</option>
+                      <option value="ROLE_ADMIN,ROLE_USER">Admin</option>
                     </select>
+                  </div>
+                  <div className="div15">
+                    <label htmlFor="birthdate">Birthdate</label>
+                    <input
+                      type="date"
+                      id="birthdate"
+                      name="birthdate"
+                      value={formData.birthdate}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="div16">
+                    <label htmlFor="date_of_joining">Joining Date</label>
+                    <input
+                      type="date"
+                      id="date_of_joining"
+                      name="dateOfJoining"
+                      value={formData.dateOfJoining}
+                      onChange={handleChange}
+                    />
                   </div>
                   <div className="div14">
                     <button type="submit">ADD</button>
@@ -232,7 +267,7 @@ const handleSubmit = async (e) => {
               </form>
             </div>
           </div>
-          <Toaster richColors/>
+          <Toaster richColors />
         </main>
       </div>
     </>

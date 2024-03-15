@@ -7,6 +7,8 @@
     font-family: 'Poppins', sans-serif;
 }
 
+
+
 .parentAddEmployee {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -36,6 +38,10 @@
     margin-bottom: 10px;
     box-sizing: border-box;
     transition: border-color 0.3s;
+}
+
+.parentAddEmployee select{
+    background-color: white;
 }
 
 .parentAddEmployee input[type="text"]:focus,
@@ -93,9 +99,9 @@
 .parentAddEmployee .div14 button {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #0027b2;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 18px;
     background-color: #0027b2;
     color: white;
     cursor: pointer;
@@ -104,6 +110,7 @@
 
 .parentAddEmployee .div14 button:hover {
     background-color: #007acc;
+    border-color: #007acc;
 }
 
 .parentAddEmployee .div14 button:focus {
@@ -165,4 +172,12 @@
 
 .parentAddEmployee .div14 {
     grid-area: 6 / 5 / 7 / 7;
+}
+
+.parentAddEmployee .div15 {
+    grid-area: 6 / 1 / 7 / 3;
+}
+
+.parentAddEmployee .div16 {
+    grid-area: 6 / 3 / 7 / 5;
 }

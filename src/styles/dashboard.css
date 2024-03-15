@@ -24,6 +24,7 @@ li {
 	--grey: #eee;
 	--dark-grey: #AAAAAA;
 	--dark: #342E37;
+	--light-dark: #F9F9F9;
 	--red: #DB504A;
 	--yellow: #FFCE26;
 	--light-yellow: #FFF2C6;
@@ -31,6 +32,12 @@ li {
 	--light-orange: #FFE0D3;
 	--green: #65B741;
 	--light-green: #84b071;
+
+	--calendar-back: #f5f5f5;
+	--calendar-font: #858585;
+	--calendar-weekend: #ff0038;
+
+	--white: #ffffff;
 }
 
 html {
@@ -41,6 +48,12 @@ body.dark {
 	--light: #303032;
 	--grey: #1e1e1e;
 	--dark: #FBFBFB;
+	--light-dark: #424142;
+	--calendar-back: #989898;
+	--calendar-font: #333333;
+	--calendar-weekend: #BD2031;
+
+	--white:#1e1e1e;
 }
 
 body {
@@ -76,7 +89,7 @@ body {
 }
 
 #sidebar .brand {
-	font-size: 24px;
+	font-size: 40px;
 	font-weight: 700;
 	height: 56px;
 	display: flex;
@@ -92,9 +105,14 @@ body {
 }
 
 #sidebar .brand .bx {
-	min-width: 60px;
+	min-width: 70px;
+	height: 50px;
 	display: flex;
 	justify-content: center;
+}
+
+#sidebar .brand svg {
+	fill: var(--blue);
 }
 
 #sidebar .side-menu {
@@ -156,15 +174,11 @@ body {
 	font-weight: 400;
 }
 
-#sidebar .side-menu.top li span:hover{
-	font-weight: 500;
-}
-
 #sidebar .side-menu li span {
 	font-weight: 600;
 }
 
-#sidebar .side-menu.top li.active span{
+#sidebar .side-menu.top li.active span {
 	font-weight: 500;
 }
 
@@ -178,8 +192,20 @@ body {
 	transition: width .3s ease;
 }
 
+#sidebar .side-menu li a.account {
+	color: var(--blue);
+}
+
+#sidebar .side-menu li a.account svg {
+	fill: var(--blue);
+}
+
 #sidebar .side-menu li a.logout {
 	color: var(--red);
+}
+
+#sidebar .side-menu li a.logout svg {
+	fill: var(--red);
 }
 
 #sidebar .side-menu.top li a:hover {
@@ -195,11 +221,11 @@ body {
 	background-color: #addfad;
 }
 
-#sidebar .side-menu li .punches.punchIn svg{
+#sidebar .side-menu li .punches.punchIn svg {
 	fill: darkgreen;
 }
 
-#sidebar .side-menu li .punches.punchIn span{
+#sidebar .side-menu li .punches.punchIn span {
 	color: darkgreen;
 }
 
@@ -209,11 +235,11 @@ body {
 	background-color: #fbceb1;
 }
 
-#sidebar .side-menu li .punches.punchOut svg{
+#sidebar .side-menu li .punches.punchOut svg {
 	fill: red;
 }
 
-#sidebar .side-menu li .punches.punchOut span{
+#sidebar .side-menu li .punches.punchOut span {
 	color: red;
 }
 
@@ -234,7 +260,7 @@ body {
 	justify-content: center;
 }
 
-#sidebar .side-menu li a svg{
+#sidebar .side-menu li a svg {
 	fill: var(--dark);
 }
 
@@ -293,12 +319,22 @@ body {
 
 #content nav .bx.bx-menu {
 	cursor: pointer;
-	color: var(--dark);
+	fill: var(--dark);
 }
 
 #content nav .nav-link {
 	font-size: 16px;
 	transition: .3s ease;
+}
+
+/* #content nav .nav-link.contact{
+	margin-right: auto;
+} */
+
+#content nav .greetings{
+	margin: 0 auto;
+	color: var(--dark);
+	font-weight: 500;
 }
 
 #content nav .nav-link:hover {
@@ -344,9 +380,18 @@ body {
 	cursor: pointer;
 }
 
+#content nav form .form-input button svg {
+	fill: var(--dark);
+}
+
 #content nav .notification {
-	font-size: 20px;
+	font-size: 25px;
 	position: relative;
+}
+
+#content nav .notification svg {
+	/* width: 60px; */
+	fill: var(--dark);
 }
 
 #content nav .notification .num {
@@ -402,16 +447,19 @@ body {
 /* NAVBAR */
 
 
+  
+
 
 
 
 /* MAIN */
 #content main {
 	width: 100%;
-	padding: 36px 24px;
+	padding: 10px 24px;
 	font-family: var(--poppins);
 	max-height: calc(100vh - 56px);
 	overflow-y: auto;
+	color: var(--dark);
 }
 
 #content main .head-title {
@@ -481,6 +529,7 @@ body {
 	background: var(--light);
 	border-radius: 20px;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	grid-gap: 24px;
 	text-align: left;
@@ -497,6 +546,57 @@ body {
 	padding: 10px;
 }
 
+#content main .box-info li.calendars{
+	color: #000;
+}
+
+.react-calendar {
+	background-color: var(--calendar-back);
+}
+
+.react-calendar .react-calendar__navigation {
+	border-bottom: 1px solid #000133;
+}
+
+.react-calendar .react-calendar__navigation button {
+	color: #000133;
+	font-weight: 600;
+}
+
+.react-calendar .react-calendar__viewContainer {
+	background-color: var(--calendar-back);
+}
+
+.react-calendar .react-calendar__viewContainer .react-calendar__month-view div div .react-calendar__month-view__weekdays .react-calendar__month-view__weekdays__weekday {
+	color: #000133;
+}
+
+.react-calendar .react-calendar__viewContainer .react-calendar__month-view div div .react-calendar__month-view__weekdays .react-calendar__month-view__weekdays__weekday.react-calendar__month-view__weekdays__weekday--weekend {
+	color: var(--calendar-weekend);
+}
+
+.react-calendar__tile--now {
+	background-color: #C3F0C2;
+}
+
+.react-calendar .react-calendar__viewContainer .react-calendar__month-view div div .react-calendar__month-view__days button.react-calendar__tile--active {
+	background-color: #003870;
+	color: white;
+}
+
+.react-calendar .react-calendar__viewContainer .react-calendar__month-view div div .react-calendar__month-view__days button {
+	color: var(--calendar-font);
+}
+
+.react-calendar .react-calendar__viewContainer .react-calendar__month-view div div .react-calendar__month-view__days button.weekend {
+	color: var(--calendar-weekend);
+}
+
+.react-calendar .react-calendar__viewContainer .react-calendar__month-view div div .react-calendar__month-view__days button.holiday {
+	background-color: var(--red);
+	color: var(--white);
+}
+
 /* Blue */
 #content main .box-info li:nth-child(3n+1) .bx {
 	background: var(--light-blue);
@@ -506,7 +606,7 @@ body {
 /* Yellow */
 #content main .box-info li:nth-child(3n+2) .bx {
 	background: var(--light-yellow);
-	fill: var(--yellow);
+	fill: darkgoldenrod;
 }
 
 /* Orange */
@@ -682,6 +782,8 @@ body {
 /* CONTENT */
 
 
+  
+
 
 
 
@@ -755,4 +857,31 @@ body {
 	#content main .table-data .todo .todo-list {
 		min-width: 420px;
 	}
+
+	#sidebar{
+		display: none;
+	}
+
+	#content{
+		left: 0;
+		width: 100%;
+	}
+
+	#sidebar.hide~#content{
+		left: 0;
+		width: 100%;
+	}
+
+	#content nav::before{
+		display: none;
+	}
+
+	#content nav{
+		width: 100%;
+	}
+
+	#content main{
+		padding: 10px;
+	}
+	
 }

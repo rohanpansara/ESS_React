@@ -15,7 +15,9 @@ const Attendance = () => {
         <>
             <Base page="attendance" />
             <div id="content">
-                <main></main>
+                <main>
+                    
+                </main>
             </div>
         </>
     )
